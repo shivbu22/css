@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------------------------------
+   Theme tokens. Dark is the default; `[data-theme='light']` flips everything.
+   -------------------------------------------------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  --canvas: #07090f;
+  --panel: #0d111a;
+  --raised: #141a26;
+  --hair: rgba(255, 255, 255, 0.07);
+  --edge: rgba(255, 255, 255, 0.14);
+
+  --fg: #e9eef7;
+  --muted: #98a5ba;
+  --faint: #5f6d84;
+
+  --accent: #22d3ee;
+  --accent-soft: #7dd3fc;
+  --accent-tint: rgba(34, 211, 238, 0.12);
+  --violet: #a78bfa;
+
+  --ok: #34d399;
+  --ok-tint: rgba(52, 211, 153, 0.13);
+  --warn: #fbbf24;
+  --warn-tint: rgba(251, 191, 36, 0.13);
+  --err: #fb7185;
+  --err-tint: rgba(251, 113, 133, 0.13);
+
+  --panel-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 12px 32px rgba(0, 0, 0, 0.36);
+  --glow-a: rgba(34, 211, 238, 0.09);
+  --glow-b: rgba(167, 139, 250, 0.09);
+
+  --tok-plain: #dde5f2;
+  --tok-comment: #5a6980;
+  --tok-string: #7ee0b0;
+  --tok-keyword: #c4a7ff;
+  --tok-number: #f2b479;
+  --tok-tag: #6fd6ff;
+  --tok-attr: #a5e2ff;
+  --tok-prop: #8fd3ff;
+  --tok-fn: #74d2f7;
+  --tok-punct: #76859c;
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --canvas: #f5f6fa;
+  --panel: #ffffff;
+  --raised: #f1f3f9;
+  --hair: rgba(15, 23, 42, 0.09);
+  --edge: rgba(15, 23, 42, 0.16);
+
+  --fg: #0f172a;
+  --muted: #566480;
+  --faint: #8b98ae;
+
+  --accent: #0891b2;
+  --accent-soft: #0e7490;
+  --accent-tint: rgba(8, 145, 178, 0.1);
+  --violet: #7c3aed;
+
+  --ok: #059669;
+  --ok-tint: rgba(5, 150, 105, 0.11);
+  --warn: #b45309;
+  --warn-tint: rgba(180, 83, 9, 0.11);
+  --err: #e11d48;
+  --err-tint: rgba(225, 29, 72, 0.1);
+
+  --panel-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 10px 28px rgba(15, 23, 42, 0.08);
+  --glow-a: rgba(8, 145, 178, 0.08);
+  --glow-b: rgba(124, 58, 237, 0.07);
+
+  --tok-plain: #1f2937;
+  --tok-comment: #94a3b8;
+  --tok-string: #047857;
+  --tok-keyword: #7c3aed;
+  --tok-number: #b45309;
+  --tok-tag: #0369a1;
+  --tok-attr: #0e7490;
+  --tok-prop: #0e7490;
+  --tok-fn: #0891b2;
+  --tok-punct: #64748b;
+
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1100px 620px at 10% -10%, var(--glow-a), transparent 60%),
+    radial-gradient(900px 520px at 98% 2%, var(--glow-b), transparent 55%),
+    var(--canvas);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--edge) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hair);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--edge);
+  background-clip: padding-box;
+}
+
+::selection {
+  background: var(--accent-tint);
+}
+
+code,
+pre,
+kbd {
+  font-variant-ligatures: none;
+}
+
+@layer components {
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: 14px;
+    box-shadow: var(--panel-shadow);
+  }
+
+  .panel-flat {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: 14px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    border: 1px solid var(--hair);
+    background: var(--raised);
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+
+  .rule {
+    border-color: var(--hair);
+  }
+
+  .divide-rule > * + * {
+    border-top: 1px solid var(--hair);
+  }
+
+  /* Code token colours — the tokenizer only names kinds, the theme paints them. */
+  .tok-plain { color: var(--tok-plain); }
+  .tok-comment { color: var(--tok-comment); font-style: italic; }
+  .tok-string { color: var(--tok-string); }
+  .tok-keyword { color: var(--tok-keyword); }
+  .tok-number { color: var(--tok-number); }
+  .tok-tag { color: var(--tok-tag); }
+  .tok-attr { color: var(--tok-attr); }
+  .tok-property { color: var(--tok-prop); }
+  .tok-selector { color: var(--tok-tag); }
+  .tok-function { color: var(--tok-fn); }
+  .tok-punctuation { color: var(--tok-punct); }
+
+  .gradient-text {
+    background: linear-gradient(92deg, var(--accent) 0%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .orb {
+    background: conic-gradient(from 140deg, var(--accent), var(--violet), var(--accent));
+    box-shadow: 0 0 14px var(--accent-tint);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

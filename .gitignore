@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+.static-build-excluded/
+.env.local
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.dev.log
+.dev.pid
+.ndjson.log
+.DS_Store
+
+.venv/
+venv/
+__pycache__/
